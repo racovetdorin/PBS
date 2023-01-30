@@ -1,0 +1,14 @@
+.ropeproject/
+media/
+static/
+*~
+.git
+.venv
+db.sqlite3
+*.pyc
+*.swp
+*.mo
+.idea/
+gunicorn.pid
+*.sublime-project
+*.sublime-workspace

@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_DB=database
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    command:  bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - PSQL_DB_NAME=database
+      - PSQL_DB_USER=user
+      - PSQL_DB_PASSWORD=password
+      - PSQL_DB_HOST=db
+      - PSQL_DB_PORT=5432
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
